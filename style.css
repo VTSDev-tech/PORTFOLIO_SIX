@@ -396,6 +396,9 @@ section {
   letter-spacing: -0.02em;
   text-transform: uppercase;
   margin-bottom: 4rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
 }
 
 /* CYBERPUNK BUTTONS */
@@ -1541,8 +1544,10 @@ footer {
 /* book container */
 .book-container {
   width: 840px;
+  max-width: none !important;
   height: 530px;
   position: relative;
+  flex-shrink: 0;
   transform-style: preserve-3d;
   transition: transform 0.5s ease;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
@@ -1552,6 +1557,7 @@ footer {
 /* Sheets that stack */
 .book-sheet {
   width: 50%;
+  max-width: none !important;
   height: 100%;
   position: absolute;
   top: 0;
@@ -1953,7 +1959,7 @@ footer {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 900px) {
-  nav ul {
+  .nav-links {
     display: none;
   }
   .work-card {

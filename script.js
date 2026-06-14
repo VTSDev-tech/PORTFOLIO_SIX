@@ -419,6 +419,22 @@ function initChronicleBook() {
       }
     });
 
+    // Dynamic centering for smaller screens
+    if (window.innerWidth <= 900) {
+      if (currentSheetIndex === 0) {
+        // Closed, showing front cover (right half)
+        gsap.to(flipbook, { xPercent: -25, duration: 0.5, ease: "power2.out" });
+      } else if (currentSheetIndex === maxSheets) {
+        // Closed, showing back cover (left half)
+        gsap.to(flipbook, { xPercent: 25, duration: 0.5, ease: "power2.out" });
+      } else {
+        // Open, showing both pages
+        gsap.to(flipbook, { xPercent: 0, duration: 0.5, ease: "power2.out" });
+      }
+    } else {
+      gsap.to(flipbook, { xPercent: 0, duration: 0.5 });
+    }
+
     // Cinematic Text Reveal for newly exposed pages
     const newActiveTexts = [];
     if (currentSheetIndex > 0) {
