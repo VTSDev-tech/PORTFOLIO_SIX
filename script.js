@@ -34,7 +34,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Cursor hover active state
-const interactables = document.querySelectorAll('a, button, .work-card, .timeline-content, .resume-skill-box, .resume-footer-item, .book-sheet, .book-nav-btn, .progress-dot, .personal-item, .page-image-slot, .nav-logo, .audio-btn, .connect-email, .connect-social-icon, .intro-play-btn');
+const interactables = document.querySelectorAll('a, button, .work-card, .timeline-content, .resume-skill-box, .resume-footer-item, .book-sheet, .book-nav-btn, .progress-dot, .personal-grid-item, .page-image-slot, .nav-logo, .audio-btn, .connect-email, .connect-social-icon, .intro-play-btn');
 interactables.forEach(item => {
   item.addEventListener('mouseenter', () => {
     document.body.classList.add('cursor-hover');

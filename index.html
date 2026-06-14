@@ -76,6 +76,7 @@
       <li><a href="#projects" class="nav-lnk magnetic-target">Projects</a></li>
       <li><a href="#achievements" class="nav-lnk magnetic-target">Awards</a></li>
       <li><a href="#illustrations" class="nav-lnk magnetic-target">Illustrations</a></li>
+      <li><a href="#personal-projects" class="nav-lnk magnetic-target">Personal Projects</a></li>
     </ul>
     <div class="nav-extra">
       <button id="audio-toggle" class="audio-btn magnetic-target off">SOUND OFF</button>
@@ -721,26 +722,47 @@
       </div>
 
       <!-- Personal Projects Showcase -->
-      <div class="artbook-card" style="display: flex; flex-direction: column; align-items: center; gap: 0; background: #ffffff;">
-        <img loading="lazy" src="assets/personal_projects.png" alt="Personal Projects Header" class="artbook-img" style="border: none; box-shadow: none; max-width: 600px; margin: 30px auto -150px auto; position: relative; z-index: 0;">
+      <!-- Personal Projects Showcase -->
+      <div id="personal-projects" class="artbook-card" style="display: flex; flex-direction: column; align-items: center; gap: 0; background: #ffffff; padding-top: 50px;">
         
-        <!-- Personal Projects Free Layout Grid (White Background Placeholders) -->
+        <!-- Personal Projects Columns -->
         <div class="personal-grid-container">
-          <div class="personal-grid">
+          <div class="personal-cols">
             
-            <!-- Frame 1 (Leviathan Studies Sketch Image) -->
-            <div class="personal-grid-item">
-              <img loading="lazy" src="assets/personal_projects_1.png" alt="Leviathan Studies Sketch" class="personal-grid-img">
+            <!-- Left Column: Wireframe & Kraken/Ken Studies -->
+            <div class="personal-col left-col">
+              <!-- Item 0: Epic Wireframe -->
+              <div class="personal-grid-item item-wireframe">
+                <img loading="lazy" src="assets/personal_wireframe.png" alt="3D Environment Wireframe" class="personal-grid-img">
+              </div>
+              
+              <!-- Item 3: Sketch 2 (Kraken/Ken Studies) -->
+              <div class="personal-grid-item item-ken">
+                <img loading="lazy" src="assets/personal_projects_2.png" alt="Kraken Studies Sketch" class="personal-grid-img">
+              </div>
             </div>
             
-            <!-- Frame 2 (Kraken Studies Sketch Image) -->
-            <div class="personal-grid-item">
-              <img loading="lazy" src="assets/personal_projects_2.png" alt="Kraken Studies Sketch" class="personal-grid-img">
-            </div>
-            
-            <!-- Frame 3 (Ziz Studies Sketch Image) -->
-            <div class="personal-grid-item">
-              <img loading="lazy" src="assets/personal_projects_3.png" alt="Ziz Studies Sketch" class="personal-grid-img">
+            <!-- Right Column: Title & Leviathan & Ziz Studies -->
+            <div class="personal-col right-col">
+              <!-- Item 1: Title Header -->
+              <div class="personal-title-item item-title">
+                <img loading="lazy" src="assets/personal_projects.png" alt="Personal Projects Header" class="personal-title-img">
+              </div>
+              
+              <!-- Item 2: Sketch 1 (Leviathan Studies) -->
+              <div class="personal-grid-item item-leviathan">
+                <img loading="lazy" src="assets/personal_projects_1.png" alt="Leviathan Studies Sketch" class="personal-grid-img">
+              </div>
+              
+              <!-- Item 5: Sketch 4 (Creature Studies) -->
+              <div class="personal-grid-item item-creature">
+                <img loading="lazy" src="assets/personal_projects_4.png" alt="Creature Studies Sketch" class="personal-grid-img">
+              </div>
+              
+              <!-- Item 4: Sketch 3 (Ziz Studies) -->
+              <div class="personal-grid-item item-ziz">
+                <img loading="lazy" src="assets/personal_projects_3.png" alt="Ziz Studies Sketch" class="personal-grid-img">
+              </div>
             </div>
             
           </div>
@@ -774,3 +796,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

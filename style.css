@@ -1370,13 +1370,26 @@ footer {
   justify-content: center;
 }
 
-.personal-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+.personal-cols {
+  display: flex;
+  gap: 32px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1600px;
   background-color: #ffffff;
+}
+
+.personal-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.personal-col.left-col {
+  flex: 1.15; /* Wireframe is slightly wider */
+}
+
+.personal-col.right-col {
+  flex: 1;
 }
 
 .personal-grid-item {
@@ -1419,11 +1432,31 @@ footer {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: contain;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .personal-grid-item:hover .personal-grid-img {
-  transform: scale(1.02);
+  transform: scale(1.01);
+}
+
+/* Title container and image specific styles */
+.personal-title-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10px 20px 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.personal-title-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply; /* removes white background to prevent overlapping cuts */
 }
 
 .placeholder-content {
@@ -2003,18 +2036,42 @@ footer {
   }
 }
 
-/* Responsive Overrides for Personal Projects Grid */
+/* Responsive Overrides for Personal Projects Columns */
 @media (max-width: 900px) {
-  .personal-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .personal-grid {
+  .personal-cols {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 24px;
+  }
+  
+  .personal-col.left-col,
+  .personal-col.right-col {
+    display: contents; /* makes their children direct grid items */
+  }
+  
+  /* Order of items on mobile */
+  .item-title {
+    order: 1;
+  }
+  
+  .item-wireframe {
+    order: 2;
+  }
+  
+  .item-leviathan {
+    order: 3;
+  }
+  
+  .item-ken {
+    order: 4;
+  }
+  
+  .item-creature {
+    order: 5;
+  }
+  
+  .item-ziz {
+    order: 6;
   }
 }
 
