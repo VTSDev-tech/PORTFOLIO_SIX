@@ -34,7 +34,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Cursor hover active state
-const interactables = document.querySelectorAll('a, button, .work-card, .timeline-content, .resume-skill-box, .resume-footer-item, .book-sheet, .book-nav-btn, .progress-dot');
+const interactables = document.querySelectorAll('a, button, .work-card, .timeline-content, .resume-skill-box, .resume-footer-item, .book-sheet, .book-nav-btn, .progress-dot, .personal-item, .page-image-slot, .nav-logo, .audio-btn, .connect-email, .connect-social-icon, .intro-play-btn');
 interactables.forEach(item => {
   item.addEventListener('mouseenter', () => {
     document.body.classList.add('cursor-hover');
@@ -220,33 +220,52 @@ function initGSAPScroll() {
     }
   });
 
-  // Background dust generator for library feel
+  // Parallax Background for Chronicle Book (Slightly slower than scroll)
+  gsap.fromTo('#chronicle-book', 
+    { backgroundPosition: "50% 0%" },
+    {
+      backgroundPosition: "50% 100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: '#chronicle-book',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    }
+  );
+
+  // Background dust generator (Glowing Embers / Tàn lửa)
   setInterval(() => {
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.3) {
       const dust = document.createElement('div');
       dust.className = 'ambient-dust';
       dust.style.position = 'fixed';
       dust.style.left = `${Math.random() * window.innerWidth}px`;
       dust.style.top = `${window.innerHeight + 10}px`;
-      dust.style.width = `${Math.random() * 3 + 1}px`;
+      dust.style.width = `${Math.random() * 4 + 2}px`;
       dust.style.height = dust.style.width;
-      dust.style.background = '#00f5d4';
+      
+      const colors = ['#f77f00', '#e63946', '#ffb703'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      dust.style.background = color;
       dust.style.borderRadius = '50%';
       dust.style.pointerEvents = 'none';
       dust.style.zIndex = '0';
-      dust.style.boxShadow = '0 0 8px #00f5d4';
+      dust.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
       document.body.appendChild(dust);
 
       gsap.to(dust, {
         y: -window.innerHeight - 50,
-        x: `+=${(Math.random() - 0.5) * 200}`,
-        opacity: Math.random() * 0.4 + 0.1,
-        duration: Math.random() * 10 + 10,
-        ease: "none",
+        x: `+=${(Math.random() - 0.5) * 300}`,
+        opacity: Math.random() * 0.6 + 0.2,
+        duration: Math.random() * 8 + 6,
+        ease: "power1.inOut",
         onComplete: () => dust.remove()
       });
     }
-  }, 300);
+  }, 150);
 
   // 2. Wave Float effect on cards
   const cards = document.querySelectorAll('.work-card');
@@ -395,7 +414,8 @@ function initGSAPScroll() {
 // ==========================================
 function initChronicleBook() {
   const flipbook = document.getElementById('flipbook');
-  if (!flipbook) return;
+  const flipbookWrapper = document.getElementById('flipbook-wrapper');
+  if (!flipbook || !flipbookWrapper) return;
 
   const sheets = flipbook.querySelectorAll('.book-sheet');
   const chronicleBookSection = document.getElementById('chronicle-book');
@@ -423,16 +443,16 @@ function initChronicleBook() {
     if (window.innerWidth <= 900) {
       if (currentSheetIndex === 0) {
         // Closed, showing front cover (right half)
-        gsap.to(flipbook, { xPercent: -25, duration: 0.5, ease: "power2.out" });
+        gsap.to(flipbookWrapper, { xPercent: -25, duration: 0.5, ease: "power2.out" });
       } else if (currentSheetIndex === maxSheets) {
         // Closed, showing back cover (left half)
-        gsap.to(flipbook, { xPercent: 25, duration: 0.5, ease: "power2.out" });
+        gsap.to(flipbookWrapper, { xPercent: 25, duration: 0.5, ease: "power2.out" });
       } else {
         // Open, showing both pages
-        gsap.to(flipbook, { xPercent: 0, duration: 0.5, ease: "power2.out" });
+        gsap.to(flipbookWrapper, { xPercent: 0, duration: 0.5, ease: "power2.out" });
       }
     } else {
-      gsap.to(flipbook, { xPercent: 0, duration: 0.5 });
+      gsap.to(flipbookWrapper, { xPercent: 0, duration: 0.5 });
     }
 
     // Cinematic Text Reveal for newly exposed pages
@@ -452,11 +472,37 @@ function initChronicleBook() {
     }
   }
 
+  // Web Audio API for Zero-Latency playback
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioContext();
+  let flipAudioBuffer = null;
+
+  fetch('assets/page_flip.mp3')
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => audioCtx.decodeAudioData(arrayBuffer))
+    .then(audioBuffer => { flipAudioBuffer = audioBuffer; })
+    .catch(e => console.log("Error loading flip sound", e));
+
+  function playFlipSound() {
+    const audioToggle = document.getElementById('audio-toggle');
+    if (audioToggle && !audioToggle.classList.contains('off') && flipAudioBuffer) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const source = audioCtx.createBufferSource();
+      source.buffer = flipAudioBuffer;
+      const gainNode = audioCtx.createGain();
+      gainNode.gain.value = 0.8; // Set volume
+      source.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      source.start(0); // Play instantly with zero delay
+    }
+  }
+
   // Next sheet flip
   function nextSheet() {
     if (currentSheetIndex < maxSheets) {
       currentSheetIndex++;
       updateBookState();
+      playFlipSound();
     }
   }
 
@@ -465,6 +511,7 @@ function initChronicleBook() {
     if (currentSheetIndex > 0) {
       currentSheetIndex--;
       updateBookState();
+      playFlipSound();
     }
   }
 
@@ -495,7 +542,7 @@ function initChronicleBook() {
   });
 
   // Breathing Book Animation
-  gsap.to(flipbook, {
+  gsap.to(flipbookWrapper, {
     y: -8,
     duration: 3.5,
     repeat: -1,

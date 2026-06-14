@@ -56,6 +56,12 @@ body {
   overflow-x: hidden;
   position: relative;
   -webkit-font-smoothing: antialiased;
+  cursor: none; /* Hide default cursor */
+}
+
+/* Ensure default cursor doesn't appear on interactive elements */
+a, button, input, textarea, select {
+  cursor: none !important;
 }
 
 /* CUSTOM SCROLLBAR */
@@ -141,16 +147,17 @@ body::before {
   left: 0;
   z-index: 999999;
   pointer-events: none;
-  mix-blend-mode: difference;
+  /* Removed mix-blend-mode to preserve actual glow colors */
 }
 .cursor-dot {
   width: 8px;
   height: 8px;
-  background-color: var(--neon-cyan);
+  background-color: #f77f00;
+  box-shadow: 0 0 10px #f77f00, 0 0 20px #f77f00;
   border-radius: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  transition: width 0.15s, height 0.15s, background-color 0.15s;
+  transition: width 0.15s, height 0.15s, background-color 0.15s, box-shadow 0.15s;
 }
 .cursor-ring {
   width: 32px;
@@ -165,15 +172,17 @@ body::before {
 
 /* Cursor states */
 body.cursor-hover #custom-cursor .cursor-ring {
-  transform: translate(-50%, -50%) scale(2.2);
-  border-color: rgba(255, 255, 255, 0.8);
-  background-color: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%) scale(1.8);
+  border-color: rgba(247, 127, 0, 0.8);
+  background-color: rgba(247, 127, 0, 0.1);
+  box-shadow: 0 0 15px rgba(247, 127, 0, 0.4);
   opacity: 1;
 }
 body.cursor-hover #custom-cursor .cursor-dot {
-  background-color: #c1121f;
-  width: 14px;
-  height: 14px;
+  background-color: #ffb703;
+  box-shadow: 0 0 15px #ffb703, 0 0 30px #ffb703;
+  width: 12px;
+  height: 12px;
 }
 
 /* ==========================================
@@ -2187,3 +2196,6 @@ footer {
   .connect-subtitle { font-size: 0.95rem; }
   .connect-email { font-size: 1rem; }
 }
+
+#flipbook-wrapper { transform-style: preserve-3d; }
+
