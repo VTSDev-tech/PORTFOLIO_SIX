@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vo Tuan Si - Portfolio</title>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Vo Tuan Si - Portfolio">
+  <meta property="og:description" content="Technical Artist & Game Developer. Exploring the dark fantasy oriental cyberpunk world.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/votualsi/portfolio/main/assets/boss_illustration.jpg">
+  <meta property="og:url" content="https://votualsi-portfolio.com">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Charm:wght@400;700&family=Charmonman:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Icon Libraries CDNs -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- CDN Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Ocean lighting & Scanline overlay -->
+  <div class="water-rays"></div>
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Ambient Audio Player -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/nhacbackground.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div class="intro-bg-image"></div>
+    <div class="intro-grain"></div>
+    <div class="intro-center">
+      <div class="intro-line"></div>
+      <div class="intro-eyebrow">VÕ TUẤN SĨ</div>
+      <h2 class="intro-name">PORTFOLIO</h2>
+      <div class="intro-role">TECHNICAL ARTIST & GAME DEVELOPER</div>
+      <div class="intro-line"></div>
+      <button class="intro-play-btn" id="enter-site-btn">
+        <span class="play-icon">▶</span>
+        <span class="play-label">ENTER</span>
+      </button>
+
+      <!-- Loading UI (Hidden initially) -->
+      <div id="intro-loading-ui" style="display: none; flex-direction: column; align-items: center; margin-top: 2.5rem; width: 100%; max-width: 300px;">
+        <div style="width: 100%; height: 2px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden;">
+          <div id="loading-fill" style="width: 0%; height: 100%; background: #ffffff; position: absolute; left: 0; top: 0; box-shadow: 0 0 10px #ffffff;"></div>
+        </div>
+        <div id="loading-text" style="font-family: var(--font-mono); font-size: 0.65rem; color: #c8c8c8; letter-spacing: 0.3em; margin-top: 1rem;">LOADING 0%</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="nav-logo magnetic-target">SI<span>X</span></a>
+    <ul class="nav-links">
+      <li><a href="#hero" class="nav-lnk active magnetic-target">Surface</a></li>
+      <li><a href="#projects" class="nav-lnk magnetic-target">Projects</a></li>
+      <li><a href="#achievements" class="nav-lnk magnetic-target">Awards</a></li>
+      <li><a href="#illustrations" class="nav-lnk magnetic-target">Illustrations</a></li>
+    </ul>
+    <div class="nav-extra">
+      <button id="audio-toggle" class="audio-btn magnetic-target off">SOUND OFF</button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION (RESUME CARD CONCEPT) -->
+  <section id="hero">
+    <div class="resume-card-container fade-in-up">
+      
+      <!-- Left Column: Portrait & Meta -->
+      <div class="resume-left-col">
+        <div class="resume-avatar-frame">
+          <img loading="lazy" src="assets/avatar_new.png" alt="Vo Tuan Si Portrait" class="resume-avatar">
+          <div class="resume-avatar-overlay">
+            <div class="resume-meta-item"><i class="bi bi-gender-male"></i> Male</div>
+            <div class="resume-meta-item"><i class="bi bi-calendar3"></i> 28.06.2004</div>
+            <div class="resume-meta-item"><i class="bi bi-geo-alt-fill"></i> Dong Nai, VN</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Center Column: Hi & Education -->
+      <div class="resume-center-col">
+        <h1 class="resume-hi">Hi!</h1>
+        <div class="resume-bio">
+          <p>Tôi là <strong>Võ Tuấn Sĩ</strong>, một Kỹ sư Công nghệ Thông tin đam mê phát triển Game và Mỹ thuật Kỹ thuật (Technical Art). Thế mạnh của tôi là lập trình gameplay Unity (C#), thiết kế cơ chế tương tác AI thời gian thực (MediaPipe, OpenAI) và tích hợp tối ưu hóa tài nguyên đồ họa 2D.</p>
+          <p>Tôi hướng tới kiến tạo những thế giới trò chơi giàu tính mỹ thuật kết hợp công nghệ hiện đại, sẵn sàng cùng đồng đội bứt phá giới hạn tại Garena Game Jam 2026.</p>
+        </div>
+        
+        <div class="resume-block">
+          <h3 class="resume-subheading">EDUCATION</h3>
+          <div class="resume-education-list">
+            <div class="resume-edu-item">
+              <div class="resume-edu-header">2022 - 2026: Đại Học Lạc Hồng (LHU)</div>
+              <div class="resume-edu-detail">Kỹ sư Công nghệ Thông tin (Chuyên ngành Hệ thống)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Column: Skills & Experience -->
+      <div class="resume-right-col">
+        <div class="resume-block">
+          <h3 class="resume-subheading">SKILLS</h3>
+          <div class="resume-skill-boxes">
+            <div class="resume-skill-box" title="Photoshop"><i class="devicon-photoshop-plain colored"></i></div>
+            <div class="resume-skill-box" title="Procreate">
+              <svg viewBox="0 0 24 24" fill="none" stroke="url(#procreate-grad)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="procreate-svg">
+                <defs>
+                  <linearGradient id="procreate-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#3FA9F5" />
+                    <stop offset="25%" stop-color="#7AC943" />
+                    <stop offset="50%" stop-color="#FFEB3B" />
+                    <stop offset="75%" stop-color="#FF931E" />
+                    <stop offset="100%" stop-color="#FF1D25" />
+                  </linearGradient>
+                </defs>
+                <path d="M4 17.5c0-3.3 3.6-7.5 7.5-7.5s7.5 4.2 7.5 7.5-3.6 7.5-7.5 7.5-7.5-4.2-7.5-7.5c0-5 5-13.5 10-13.5s4.5 3.5 4.5 6-3.5 6-7.5 6c-3 0-5-2-5-4" />
+              </svg>
+            </div>
+            <div class="resume-skill-box" title="Unity"><i class="devicon-unity-plain colored"></i></div>
+            <div class="resume-skill-box" title="Figma"><i class="devicon-figma-plain colored"></i></div>
+            <div class="resume-skill-box" title="C#"><i class="devicon-csharp-plain colored"></i></div>
+            <div class="resume-skill-box" title="Python"><i class="devicon-python-plain colored"></i></div>
+          </div>
+        </div>
+        
+        <div class="resume-block">
+          <h3 class="resume-subheading">EXPERIENCE</h3>
+          <div class="resume-experience-list">
+            <div class="resume-exp-item">
+              <div class="resume-exp-date">08/2023 - 03/2024</div>
+              <div class="resume-exp-title">AI & Robotics Operation at Lac Hong University</div>
+            </div>
+            <div class="resume-exp-item">
+              <div class="resume-exp-date">07/2025 - 08/2025</div>
+              <div class="resume-exp-title">Lead Game Artist & Developer — "Forbidden City" project</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer Row: Contact Info -->
+      <div class="resume-footer-row">
+        <a href="tel:0329135161" class="resume-footer-item">
+          <span class="footer-icon-badge"><i class="bi bi-telephone-fill"></i></span>
+          <span>0329 135 161</span>
+        </a>
+        <a href="mailto:sivo.280400@gmail.com" class="resume-footer-item">
+          <span class="footer-icon-badge"><i class="bi bi-envelope-fill"></i></span>
+          <span>sivo.280400@gmail.com</span>
+        </a>
+        <a href="https://github.com/VTSDev-tech" target="_blank" class="resume-footer-item">
+          <span class="footer-icon-badge"><i class="bi bi-github"></i></span>
+          <span>https://github.com/VTSDev-tech</span>
+        </a>
+      </div>
+      
+    </div>
+    <div class="scroll-indicator fade-in-up">
+      <span>DIVE DEEPER</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="oriental-divider">
+    <div class="oriental-divider-line" style="--dir: right;"></div>
+    <div class="oriental-divider-center">
+      <div class="oriental-divider-seal"></div>
+    </div>
+    <div class="oriental-divider-line" style="--dir: left;"></div>
+  </div>
+
+  <!-- FEATURED PROJECTS -->
+  <section id="projects">
+    <div class="sec-label">Selected Works</div>
+    <h2 class="sec-heading">PROJECTS REEL</h2>
+    
+    <div class="gallery-container">
+      <!-- Project 1: Tử Cấm Thành -->
+      <div class="work-card scroll-reveal" id="work-tct">
+        <div class="work-visual">
+          <img loading="lazy" src="assets/forbidden_city_thumbnail.jpg" alt="Tử Cấm Thành" class="work-img">
+        </div>
+        <div class="work-details">
+          <div class="work-badge">🏆 SPECIAL AWARD — HUASHANG CHALLENGE 2025</div>
+          <h3 class="work-title">TỬ CẤM THÀNH: "HỒI ỨC CẤM KỴ"</h3>
+          <p class="work-tagline">Tái dựng kiến trúc cổ và văn hóa Á Đông trên lưới 2D</p>
+          <p class="work-desc">
+            Dự án phiêu lưu giải đố 2D dựa trên lịch sử triều đại cổ xưa. Đảm nhận vai trò Lead Game Artist kiêm Unity Integrator, xây dựng hệ thống modular kit môi trường, sprite nhân vật và lập trình logic camera chuyển cảnh.
+          </p>
+          <div class="work-techs">
+            <span>Unity 6</span>
+            <span>C#</span>
+            <span>2D Concept Art</span>
+            <span>Tilemaps</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Air Calligraphy -->
+      <div class="work-card scroll-reveal" id="work-ac">
+        <div class="work-visual">
+          <img loading="lazy" src="assets/air_calligraphy_thumbnail.png" alt="Air Calligraphy" class="work-img">
+        </div>
+        <div class="work-details">
+          <div class="work-badge">★ EDUCATIONAL INTEGRATION — LHU</div>
+          <h3 class="work-title">AIR CALLIGRAPHY: "KHÔNG TRUNG THƯ PHÁP"</h3>
+          <p class="work-tagline">Khi nét mực cổ thư pháp tương tác thời gian thực trong không gian số</p>
+          <p class="work-desc">
+            Web game độc đáo sử dụng công nghệ AI Hand-Tracking để nhận diện chuyển động nét bút trong không khí. Thiết kế giao diện tối giản (Minimalist HUD) và chuẩn hóa dữ liệu nét chữ giúp ứng dụng thực tiễn trong giảng dạy.
+          </p>
+          <div class="work-techs">
+            <span>JavaScript</span>
+            <span>MediaPipe AI</span>
+            <span>Webcam Logic</span>
+            <span>UI Design</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: App Crurz Mini-games -->
+      <div class="work-card scroll-reveal" id="work-crurz">
+        <div class="work-visual">
+          <img loading="lazy" src="assets/cruzr_thumbnail.png" alt="App Crurz" class="work-img">
+        </div>
+        <div class="work-details">
+          <div class="work-badge">★ GAMIFICATION SYSTEM</div>
+          <h3 class="work-title">APP CRURZ: "VI TƯƠNG TÁC"</h3>
+          <p class="work-tagline">Tối ưu hóa trải nghiệm người dùng thông qua các mini-game nhỏ</p>
+          <p class="work-desc">
+            Tích hợp các cấu phần trò chơi ngắn trực quan vào hệ thống ứng dụng quản lý khách hàng. Lập trình logic, quản lý điểm số và kết nối cơ sở dữ liệu thời gian thực giúp tăng trưởng tương tác người dùng.
+          </p>
+          <div class="work-techs">
+            <span>Gamification</span>
+            <span>Gameplay Logic</span>
+            <span>Google Sheets Sync</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="oriental-divider">
+    <div class="oriental-divider-line" style="--dir: right;"></div>
+    <div class="oriental-divider-center">
+      <div class="oriental-divider-seal"></div>
+    </div>
+    <div class="oriental-divider-line" style="--dir: left;"></div>
+  </div>
+
+  <!-- AWARDS & ACHIEVEMENTS SECTION -->
+  <section id="achievements">
+    <div class="sec-label">Honor Roll</div>
+    <h2 class="sec-heading">AWARDS & RECOGNITIONS</h2>
+    
+    <div class="timeline">
+      <!-- Award 1 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">12/2025</div>
+        <div class="timeline-content">
+          <h3 class="award-name">GIẢI ĐẶC BIỆT</h3>
+          <p class="award-event">Huashang Innovative Mini Game Challenge 2025</p>
+          <p class="award-desc">Đạt giải thưởng cao nhất về thiết kế đồ họa và gameplay cho tựa game phiêu lưu giải đố 2D Tử Cấm Thành: "Hồi ức Cấm Kỵ".</p>
+        </div>
+      </div>
+
+      <!-- Award 2 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">06/2025</div>
+        <div class="timeline-content">
+          <h3 class="award-name">GIẢI QUÁN QUÂN</h3>
+          <p class="award-event">Hội nghị Khoa học Sinh viên mở rộng 2025</p>
+          <p class="award-desc">Được trao cho dự án xuất sắc Your Voice — Ứng dụng AI biên dịch ngôn ngữ ký hiệu tiếng Việt dựa trên Flutter, MediaPipe và mô hình học máy LSTM.</p>
+        </div>
+      </div>
+
+      <!-- Award 3 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">06/2025</div>
+        <div class="timeline-content">
+          <h3 class="award-name">GIẢI BA CẤP TỈNH</h3>
+          <p class="award-event">Khoa học Kỹ thuật tỉnh Vũng Tàu 2025</p>
+          <p class="award-desc">Trao cho hệ thống Borderwave giúp ngư dân định vị lãnh hải, cảnh báo ranh giới đỏ quốc gia trên nền tảng bản đồ số GIS kết nối GeoJSON.</p>
+        </div>
+      </div>
+
+      <!-- Award 4 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">12/2024</div>
+        <div class="timeline-content">
+          <h3 class="award-name">GIẢI BA SÁNG TẠO</h3>
+          <p class="award-event">Sáng kiến Sáng tạo Khoa học Kỹ thuật CT6</p>
+          <p class="award-desc">Đề tài Hệ thống Giám sát An toàn dựa trên AI giúp bảo vệ người già và người khuyết tật bằng camera xử lý hình ảnh thời gian thực.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="oriental-divider">
+    <div class="oriental-divider-line" style="--dir: right;"></div>
+    <div class="oriental-divider-center">
+      <div class="oriental-divider-seal"></div>
+    </div>
+    <div class="oriental-divider-line" style="--dir: left;"></div>
+  </div>
+
+  <!-- Cinematic Main Banner: Secret of the Forbidden Place -->
+  <section class="cinematic-section">
+    <div class="cinematic-container">
+      <img loading="lazy" src="assets/secret_forbidden_place.jpg" alt="Secret of the Forbidden Place Cinematic Art" class="cinematic-img">
+    </div>
+  </section>
+
+  <!-- Narrative Chronicle: The 3D Interactive Flipbook -->
+  <section id="chronicle-book">
+    <div class="book-section-label">Chronicle Book</div>
+    <h2 class="book-section-heading">THE CHRONICLE OF THE NAMELESS EMPRESS</h2>
+    
+    <div class="book-viewport">
+      <div class="book-container" id="flipbook">
+        
+        <!-- Sheet 0 (Cover / Page 1) -->
+        <div class="book-sheet" style="z-index: 11;">
+          <!-- Front: Cover -->
+          <div class="page-face page-front book-cover-front">
+            <!-- Utilizing background image assets/book_cover.jpg -->
+          </div>
+          <!-- Back: Page 1 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <div class="page-divider"></div>
+              <p class="page-text">Có những câu chuyện chưa từng được ghi lại.</p>
+              <p class="page-text">Có những con người từng tồn tại nhưng đã bị xóa khỏi lịch sử.</p>
+              <p class="page-text">Có những sự thật bị chôn vùi sâu đến mức thời gian cũng không thể chạm tới.</p>
+              <p class="page-text">Một trăm năm trước, phía sau những bức tường nguy nga của hoàng cung, một bí mật đã bị phong ấn.</p>
+              <p class="page-text">Một bí mật mà không ai được phép nhớ đến.</p>
+              <p class="page-text">Một bí mật mang tên ?</p>
+            </div>
+            <div class="page-number">1</div>
+          </div>
+        </div>
+
+        <!-- Sheet 1 (Image Space 1 / Page 2) -->
+        <div class="book-sheet" style="z-index: 10;">
+          <!-- Front: Image Space 1 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_1_illustration.png" alt="Phong ấn hoàng cung" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 2 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <div class="page-divider"></div>
+              <p class="page-text">Không xuất hiện trên bất kỳ bản đồ nào.</p>
+              <p class="page-text">Không được ghi trong bất kỳ sử sách nào.</p>
+              <p class="page-text">Ẩn sâu dưới lòng Tử Cấm Thành tồn tại một thư khố cổ đại.</p>
+              <p class="page-text">Nơi đây lưu giữ những gì thế giới đã cố gắng lãng quên.</p>
+              <p class="page-text">Những lá thư chưa từng được gửi đi.</p>
+              <p class="page-text">Những cuốn nhật ký chưa từng được đọc.</p>
+              <p class="page-text">Những cái tên đã biến mất khỏi lịch sử.</p>
+              <p class="page-text font-italic">Người ta nói rằng khi bước vào nơi ấy, thứ đầu tiên mất đi không phải sinh mạng.</p>
+              <p class="page-text highlight-text">Mà là ký ức.</p>
+            </div>
+            <div class="page-number">2</div>
+          </div>
+        </div>
+
+        <!-- Sheet 2 (Image Space 2 / Page 3) -->
+        <div class="book-sheet" style="z-index: 9;">
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_2_illustration.png" alt="Thư khố cổ đại" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 3 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <div class="page-divider"></div>
+              <h4 class="page-heading">Người Phụ Nữ Không Tên</h4>
+              <p class="page-text">Trong những ghi chép còn sót lại.</p>
+              <p class="page-text">Có một người phụ nữ xuất hiện lặp đi lặp lại.</p>
+              <p class="page-text">Không ai biết tên bà.</p>
+              <p class="page-text">Không ai biết gương mặt bà.</p>
+              <p class="page-text">Mọi dấu vết về sự tồn tại của bà đều đã bị xóa bỏ.</p>
+              <p class="page-text font-italic">Nhưng mỗi mảnh ký ức còn sót lại đều nhắc đến cùng một người.</p>
+              <p class="page-text">Một người đã cố gắng bảo vệ điều gì đó.</p>
+              <p class="page-text">Một người đã chờ đợi suốt một thế kỷ.</p>
+            </div>
+            <div class="page-number">3</div>
+          </div>
+        </div>
+
+        <!-- Sheet 3 (Image Space 3 / Page 4) -->
+        <div class="book-sheet" style="z-index: 8;">
+          <!-- Front: Image Space 3 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_3_illustration.png" alt="Mảnh ký ức còn lại" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 4 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <div class="page-divider"></div>
+              <h4 class="page-heading">Người Gác Thư Cuối Cùng</h4>
+              <p class="page-character-name">Lục An</p>
+              <p class="page-text font-italic">Một học giả già sống giữa những cuốn sách cũ.</p>
+              <p class="page-text">Suốt cuộc đời ông chỉ tin vào những gì được ghi lại bằng mực và giấy.</p>
+              <p class="page-text">Cho đến ngày ông tìm thấy một chiếc đèn lồng cổ.</p>
+              <p class="page-text">Khi ánh lửa xanh bùng lên.</p>
+              <p class="page-text">Nó không soi sáng con đường phía trước.</p>
+              <p class="page-text highlight-text">Nó chỉ về quá khứ.</p>
+            </div>
+            <div class="page-number">4</div>
+          </div>
+        </div>
+
+        <!-- Sheet 4 (Image Space 4 / Page 5) -->
+        <div class="book-sheet" style="z-index: 7;">
+          <!-- Front: Image Space 4 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_4_illustration.png" alt="Lục An - Người Gác Thư Cuối Cùng" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 5 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Cô Gái Mang Theo Ký Ức</h4>
+              <div class="page-divider"></div>
+              <p class="page-character-name">Ngọc Mai</p>
+              <p class="page-text font-italic">Ít nhất đó là điều duy nhất cô còn nhớ.</p>
+              <p class="page-text">Cô không biết mình là ai.</p>
+              <p class="page-text">Không biết vì sao vẫn tồn tại.</p>
+              <p class="page-text">Không biết mình đã chờ đợi bao lâu.</p>
+              <p class="page-text">Trong tay cô luôn là một cuốn nhật ký cũ kỹ.</p>
+              <p class="page-text">Dường như bên trong nó cất giữ thứ gì đó rất quan trọng.</p>
+              <p class="page-text highlight-text">Thứ gì đó mà ngay cả cái chết cũng không thể lấy đi.</p>
+            </div>
+            <div class="page-number">5</div>
+          </div>
+        </div>
+
+        <!-- Sheet 5 (Image Space 5 / Page 6) -->
+        <div class="book-sheet" style="z-index: 6;">
+          <!-- Front: Image Space 5 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_5_illustration.png" alt="Ngọc Mai - Cô Gái Mang Theo Ký Ức" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 6 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Chiếc Đèn Lồng</h4>
+              <div class="page-divider"></div>
+              <p class="page-text">Người xưa gọi nó là:</p>
+              <p class="page-character-name">Đèn Dẫn Hồn</p>
+              <p class="page-text font-italic">Một cổ vật chỉ xuất hiện khi lịch sử bị lãng quên quá lâu.</p>
+              <p class="page-text">Ngọn lửa xanh của nó không thiêu đốt.</p>
+              <p class="page-text">Không mang lại hơi ấm.</p>
+              <p class="page-text">Nhưng mỗi khi ánh sáng ấy xuất hiện.</p>
+              <p class="page-text highlight-text">Một ký ức đã mất sẽ thức tỉnh.</p>
+            </div>
+            <div class="page-number">6</div>
+          </div>
+        </div>
+
+        <!-- Sheet 6 (Image Space 6 / Page 7) -->
+        <div class="book-sheet" style="z-index: 5;">
+          <!-- Front: Image Space 6 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_6_illustration.png" alt="Chiếc Đèn Lồng" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 7 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Những Kẻ Đã Bị Lãng Quên</h4>
+              <div class="page-divider"></div>
+              <p class="page-text">Forbidden Place không chỉ lưu giữ sách.</p>
+              <p class="page-text highlight-text">Nó lưu giữ cả linh hồn.</p>
+              <p class="page-text">Những học giả, những cung nữ, những sử quan.</p>
+              <p class="page-text font-italic">Những người từng biết quá nhiều.</p>
+              <p class="page-text">Những người từng chứng kiến điều không nên chứng kiến.</p>
+              <p class="page-text">Họ đã biến mất khỏi lịch sử.</p>
+              <p class="page-text highlight-text">Nhưng chưa bao giờ rời khỏi nơi này.</p>
+            </div>
+            <div class="page-number">7</div>
+          </div>
+        </div>
+
+        <!-- Sheet 7 (Image Space 7 / Page 8) -->
+        <div class="book-sheet" style="z-index: 4;">
+          <!-- Front: Image Space 7 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_7_illustration.png" alt="Chiếc Đèn Lồng Dẫn Hồn" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 8 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Người Gác Cổng Cuối Cùng</h4>
+              <div class="page-divider"></div>
+              <p class="page-character-name">Shiyan</p>
+              <p class="page-text font-italic">Ẩn sâu trong bóng tối của Forbidden Place, có một người vẫn đang canh giữ.</p>
+              <p class="page-text">Một thế kỷ đã trôi qua. Ông vẫn chưa rời đi.</p>
+              <p class="page-text">Không ai biết ông là người hay linh hồn.</p>
+              <p class="page-text">Không ai biết ông đang bảo vệ điều gì.</p>
+              <p class="page-text highlight-text">Người đời chỉ còn nhớ một cái tên.</p>
+            </div>
+            <div class="page-number">8</div>
+          </div>
+        </div>
+
+        <!-- Sheet 8 (Image Space 8 / Page 9) -->
+        <div class="book-sheet" style="z-index: 3;">
+          <!-- Front: Image Space 8 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_8_illustration.png" alt="Người Gác Cổng Shiyan" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 9 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Những Mảnh Ký Ức</h4>
+              <div class="page-divider"></div>
+              <p class="page-text">Ký ức không biến mất. Chúng chỉ ngủ quên.</p>
+              <p class="page-text">Trong những trang sách cũ, trong những bức tường đổ nát.</p>
+              <p class="page-text font-italic">Trong những lời nói chưa kịp hoàn thành.</p>
+              <p class="page-text">Mỗi mảnh ký ức được tìm thấy.</p>
+              <p class="page-text highlight-text">Lại đưa sự thật đến gần hơn một chút.</p>
+              <p class="page-text font-italic">Nhưng cũng kéo những người tìm kiếm đến gần vực thẳm hơn.</p>
+            </div>
+            <div class="page-number">9</div>
+          </div>
+        </div>
+
+        <!-- Sheet 9 (Image Space 9 / Page 10) -->
+        <div class="book-sheet" style="z-index: 2;">
+          <!-- Front: Image Space 9 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_9_illustration.png" alt="Những Mảnh Ký Ức" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Page 10 -->
+          <div class="page-face page-back paper-page">
+            <div class="page-content">
+              <h4 class="page-heading">Điều Gì Đang Chờ Đợi?</h4>
+              <div class="page-divider"></div>
+              <p class="page-text">Phía sau cánh cửa cuối cùng.</p>
+              <p class="page-text highlight-text">Phía sau những bí mật bị chôn vùi suốt một trăm năm.</p>
+              <p class="page-text">Là sự thật.</p>
+              <p class="page-text font-italic">Hay chỉ là một ký ức đã mục nát theo thời gian?</p>
+              <p class="page-text">Không ai biết.</p>
+              <p class="page-text highlight-text">Bởi chưa ai từng quay trở về để kể lại.</p>
+            </div>
+            <div class="page-number">10</div>
+          </div>
+        </div>
+
+        <!-- Sheet 10 (Image Space 10 / Closing Cover) -->
+        <div class="book-sheet" style="z-index: 1;">
+          <!-- Front: Image Space 10 -->
+          <div class="page-face page-front paper-page page-image-slot">
+            <div class="page-content">
+              <img loading="lazy" src="assets/page_10_illustration.png" alt="Cánh Cửa Cuối Cùng" class="page-illustration">
+            </div>
+          </div>
+          <!-- Back: Closing Cover -->
+          <div class="page-face page-back book-cover-back">
+            <div class="cover-content">
+              <h3 class="cover-title">Secret of the Forbidden Place</h3>
+              <p class="cover-quote">"History only dies when nobody remembers."</p>
+              <p class="closing-seal-trans">Lịch sử chỉ thật sự chết khi không còn ai nhớ đến nó.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition Banner: Character Designs -->
+  <section class="banner-section">
+    <div class="banner-container">
+      <img loading="lazy" src="assets/character_designs.jpg" alt="Character Designs" class="banner-img">
+    </div>
+  </section>
+
+  <!-- Luc An Character Sheet Showcase -->
+  <section class="char-sheet-section">
+    <div class="char-sheet-container">
+      <img loading="lazy" src="assets/luc_an_character_sheet.png" alt="Luc An Character Design Sheet" class="char-sheet-img">
+    </div>
+  </section>
+
+  <!-- Ngoc Mai Character Sheet Showcase -->
+  <section class="char-sheet-section">
+    <div class="char-sheet-container">
+      <img loading="lazy" src="assets/ngoc_mai_character_sheet.png" alt="Ngoc Mai Character Design Sheet" class="char-sheet-img">
+    </div>
+  </section>
+
+  <!-- Wuming Empress Character Sheet Showcase -->
+  <section class="char-sheet-section">
+    <div class="char-sheet-container">
+      <img loading="lazy" src="assets/wuming_character_sheet.png" alt="Wuming Empress Character Design Sheet" class="char-sheet-img">
+    </div>
+  </section>
+
+  <!-- Shiyan Character Sheet Showcase -->
+  <section class="char-sheet-section">
+    <div class="char-sheet-container">
+      <img loading="lazy" src="assets/shiyan_character_sheet.jpg" alt="Shiyan Character Design Sheet" class="char-sheet-img">
+    </div>
+  </section>
+
+  <!-- Environment Banner Showcase -->
+  <section class="banner-section">
+    <div class="banner-container">
+      <img loading="lazy" src="assets/environment_banner.png" alt="Secret of the Environment Banner" class="banner-img env-banner-img">
+    </div>
+  </section>
+
+  <!-- Environment Outer Court Showcase -->
+  <section class="env-sheet-section">
+    <div class="env-sheet-container">
+      <img loading="lazy" src="assets/outer_court_sheet.png" alt="Ancient Palace Outer Court Sheet" class="env-sheet-img">
+    </div>
+  </section>
+
+  <!-- Environment Archive Showcase -->
+  <section class="env-sheet-section">
+    <div class="env-sheet-container">
+      <img loading="lazy" src="assets/forgotten_archive_sheet.png" alt="Forgotten Imperial Archive Sheet" class="env-sheet-img">
+    </div>
+  </section>
+
+  <!-- Environment Hall of Red Veils Showcase -->
+  <section class="env-sheet-section">
+    <div class="env-sheet-container">
+      <img loading="lazy" src="assets/red_veils_sheet.png" alt="Hall of Red Veils Environment Sheet" class="env-sheet-img">
+    </div>
+  </section>
+
+  <!-- Environment Memory Garden Showcase -->
+  <section class="env-sheet-section">
+    <div class="env-sheet-container">
+      <img loading="lazy" src="assets/memory_garden_sheet.png" alt="Memory Garden Environment Sheet" class="env-sheet-img">
+    </div>
+  </section>
+
+  <!-- Environment Forbidden Place Showcase -->
+  <section class="env-sheet-section">
+    <div class="env-sheet-container">
+      <img loading="lazy" src="assets/forbidden_place_sheet.png" alt="The Forbidden Place Final Area Sheet" class="env-sheet-img">
+    </div>
+  </section>
+
+  <!-- Transition Banner: Illustrations -->
+  <section class="banner-section banner-flush" id="illustrations">
+    <div class="banner-container">
+      <img loading="lazy" src="assets/illustration_banner.jpg" alt="Illustration of Secret of the Forbidden Place Banner" class="banner-img env-banner-img banner-flush-first">
+    </div>
+  </section>
+
+  <!-- Memory Garden Illustration Showcase -->
+  <section class="banner-section banner-flush">
+    <div class="banner-container">
+      <img loading="lazy" src="assets/memory_garden_illustration.jpg" alt="Memory Garden Illustration" class="banner-img env-banner-img banner-flush-middle">
+    </div>
+  </section>
+
+  <!-- Boss Battle Arena Illustration Showcase -->
+  <section class="banner-section banner-flush">
+    <div class="banner-container">
+      <img loading="lazy" src="assets/boss_illustration.jpg" alt="Boss Battle Arena Illustration" class="banner-img env-banner-img banner-flush-last">
+    </div>
+  </section>
+
+  <!-- Artbook Design Documents Section -->
+  <section class="artbook-section">
+    <div class="artbook-container">
+      
+      <!-- World Map Showcase -->
+      <div class="artbook-card">
+        <img loading="lazy" src="assets/world_map_sheet.png" alt="Secret of the Forbidden Place World Map Building Sheet" class="artbook-img">
+      </div>
+
+      <!-- Storyboard Showcase -->
+      <div class="artbook-card">
+        <img loading="lazy" src="assets/storyboard.jpg" alt="Secret of the Forbidden Place Storyboard" class="artbook-img">
+      </div>
+
+      <!-- Personal Projects Showcase -->
+      <div class="artbook-card" style="display: flex; flex-direction: column; align-items: center; gap: 0; background: #ffffff;">
+        <img loading="lazy" src="assets/personal_projects.png" alt="Personal Projects Header" class="artbook-img" style="border: none; box-shadow: none; max-width: 600px; margin: 30px auto -150px auto; position: relative; z-index: 0;">
+        
+        <!-- Personal Projects Free Layout Grid (White Background Placeholders) -->
+        <div class="personal-grid-container">
+          <div class="personal-grid">
+            
+            <!-- Frame 1 (Leviathan Studies Sketch Image) -->
+            <div class="personal-grid-item">
+              <img loading="lazy" src="assets/personal_projects_1.png" alt="Leviathan Studies Sketch" class="personal-grid-img">
+            </div>
+            
+            <!-- Frame 2 (Kraken Studies Sketch Image) -->
+            <div class="personal-grid-item">
+              <img loading="lazy" src="assets/personal_projects_2.png" alt="Kraken Studies Sketch" class="personal-grid-img">
+            </div>
+            
+            <!-- Frame 3 (Ziz Studies Sketch Image) -->
+            <div class="personal-grid-item">
+              <img loading="lazy" src="assets/personal_projects_3.png" alt="Ziz Studies Sketch" class="personal-grid-img">
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONNECT SECTION -->
+  <section id="connect" class="connect-section">
+    <div class="connect-bg"></div>
+    <div class="connect-overlay"></div>
+    
+    <div class="connect-content">
+      <h1 class="connect-title">LET'S FORGE<br><span class="outline-text">NEW REALITIES.</span></h1>
+      <div class="connect-divider"></div>
+      <p class="connect-subtitle">CONTACT</p>
+      <div class="connect-links">
+        <a href="mailto:siv0280400@gmail.com" class="connect-email magnetic-target">siv0280400@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">© 2026 VÕ TUẤN SĨ</div>
+  </footer>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
+</body>
+</html>
