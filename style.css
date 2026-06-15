@@ -2047,39 +2047,25 @@ footer {
 /* Responsive Overrides for Personal Projects Columns */
 @media (max-width: 900px) {
   .personal-cols {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
   
-  .personal-col.left-col,
+  .personal-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  /* Hiển thị cột phải (Tiêu đề, Leviathan, Creature, Ziz) trước */
   .personal-col.right-col {
-    display: contents; /* makes their children direct grid items */
-  }
-  
-  /* Order of items on mobile */
-  .item-title {
     order: 1;
   }
   
-  .item-wireframe {
+  /* Hiển thị cột trái (Wireframe, Ken, Centipede) sau */
+  .personal-col.left-col {
     order: 2;
-  }
-  
-  .item-leviathan {
-    order: 3;
-  }
-  
-  .item-ken {
-    order: 4;
-  }
-  
-  .item-creature {
-    order: 5;
-  }
-  
-  .item-ziz {
-    order: 6;
   }
 }
 
