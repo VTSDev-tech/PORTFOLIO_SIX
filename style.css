@@ -59,6 +59,10 @@ body {
   cursor: none; /* Hide default cursor */
 }
 
+body.intro-active {
+  overflow: hidden !important;
+}
+
 /* Ensure default cursor doesn't appear on interactive elements */
 a, button, input, textarea, select {
   cursor: none !important;

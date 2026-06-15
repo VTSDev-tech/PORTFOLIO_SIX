@@ -182,6 +182,9 @@ enterSiteBtn.addEventListener('click', () => {
 // ==========================================
 
 function runEntranceAnimations() {
+  // Allow scrolling
+  document.body.classList.remove('intro-active');
+  
   // Smoothly slide down nav bar
   gsap.from('nav', {
     y: -40,
