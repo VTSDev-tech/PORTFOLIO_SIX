@@ -200,7 +200,6 @@ body.cursor-hover #custom-cursor .cursor-dot {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s;
   overflow: hidden;
 }
 

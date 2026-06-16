@@ -102,32 +102,54 @@ enterSiteBtn.addEventListener('click', () => {
   // Prevent double clicks
   enterSiteBtn.style.pointerEvents = 'none';
   
+  // Reset scroll to top
+  window.scrollTo(0, 0);
+  
   // Create Transition Timeline (Smart Animate)
   const transitionTimeline = gsap.timeline();
 
-  // 1. Flash and hide the Enter button, show loading UI
+  // 1. Zoom and fade out the background image immediately
+  transitionTimeline.to('.intro-bg-image', {
+    scale: 1.1,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power2.inOut"
+  }, 0);
+
+  // 2. Flash and hide the Enter button, show loading UI
   transitionTimeline.to(enterSiteBtn, {
     opacity: 0,
     duration: 0.2,
     onComplete: () => {
       enterSiteBtn.style.display = 'none';
       document.getElementById('intro-loading-ui').style.display = 'flex';
+      // Change loading bar color to a warm, cinematic gold
+      document.getElementById('loading-fill').style.background = '#d4af37';
+      document.getElementById('loading-fill').style.boxShadow = '0 0 15px #d4af37';
+      document.getElementById('loading-text').style.color = '#d4af37';
     }
-  });
+  }, 0);
 
-  // 2. Animate loading bar (Fake loading)
+  // Cinematic slow push-in of the entire text block during loading
+  transitionTimeline.to('.intro-center', {
+    scale: 1.05,
+    duration: 1.8,
+    ease: "power1.inOut"
+  }, 0);
+
+  // 3. Animate loading bar (Fake loading)
   const loadObj = { val: 0 };
   transitionTimeline.to(loadObj, {
     val: 100,
-    duration: 1.5,
+    duration: 1.0,
     ease: "power2.inOut",
     onUpdate: () => {
       document.getElementById('loading-fill').style.width = loadObj.val + '%';
       document.getElementById('loading-text').innerText = 'LOADING ' + Math.round(loadObj.val) + '%';
     }
-  });
+  }, 0.2);
 
-  // 3. Play sound right before transition
+  // 4. Play sound right before transition
   transitionTimeline.call(() => {
     bgAudio.play()
       .then(() => {
@@ -135,37 +157,53 @@ enterSiteBtn.addEventListener('click', () => {
         audioToggle.innerText = "SOUND ON";
       })
       .catch(() => console.log("Autoplay blocked"));
-  });
+  }, 1.0);
 
-  // 4. Smart Animate slide out
+  // 5. Smart Animate slide out
   // Slide up and fade out the center text and loading UI
   transitionTimeline.to('.intro-center', {
     y: -80,
     opacity: 0,
-    duration: 0.8,
+    duration: 0.6,
     ease: "power2.in"
-  }, "+=0.2");
+  }, "+=0.1");
 
-  // Zoom and fade out the background image
-  transitionTimeline.to('.intro-bg-image', {
-    scale: 1.1,
-    opacity: 0,
-    duration: 1.2,
-    ease: "power2.inOut"
-  }, 0.15);
-
-  // Slide up the intro screen container itself
+  // 6. Fade out the intro screen container itself instead of sliding up
+  // Start fading out slightly BEFORE the text is fully gone to eliminate the "dead black screen" phase
   transitionTimeline.to(introScreen, {
-    y: "-100%",
-    duration: 1.2,
-    ease: "power3.inOut"
-  }, 0.15);
+    opacity: 0,
+    duration: 0.8,
+    ease: "power2.inOut",
+    onComplete: () => {
+      introScreen.style.display = 'none';
+    }
+  }, "<0.3");
 
-  // 4. Simultaneously animate the entrance of the main portfolio content
-  // Call simplified entrance animations at t = 0.5s (mid-way through slide up)
-  transitionTimeline.call(runEntranceAnimations, null, 0.5);
+  // 7. Simultaneously animate the entrance of the main portfolio content
+  transitionTimeline.call(() => {
+    document.body.classList.remove('intro-active');
+  }, null, "<0.4");
 
-  // 5. Cleanup: set display none to completely remove it from render tree
+  transitionTimeline.from('nav', {
+    y: -40,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  }, "<");
+
+  transitionTimeline.from('.resume-card-container', {
+    y: 60,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  }, "<");
+
+  transitionTimeline.from('.scroll-indicator', {
+    opacity: 0,
+    duration: 0.8
+  }, "<0.4");
+
+  // 8. Cleanup: set display none to completely remove it from render tree
   transitionTimeline.set(introScreen, {
     display: 'none'
   });
@@ -181,33 +219,7 @@ enterSiteBtn.addEventListener('click', () => {
 // 6. GSAP ANIMATIONS & DEEP-DIVE SCROLL
 // ==========================================
 
-function runEntranceAnimations() {
-  // Allow scrolling
-  document.body.classList.remove('intro-active');
-  
-  // Smoothly slide down nav bar
-  gsap.from('nav', {
-    y: -40,
-    opacity: 0,
-    duration: 1.0,
-    ease: "power3.out"
-  });
-
-  // Smoothly slide up the main resume card as a unified element (Smart Animate style)
-  gsap.from('.resume-card-container', {
-    y: 60,
-    opacity: 0,
-    duration: 1.2,
-    ease: "power3.out"
-  });
-
-  // Fade in scroll indicator
-  gsap.from('.scroll-indicator', {
-    opacity: 0,
-    duration: 1.0,
-    delay: 0.6
-  });
-}
+// (Entrance animations now handled directly in the intro timeline)
 
 function initGSAPScroll() {
   const isDesktop = window.innerWidth > 900;
